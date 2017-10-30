@@ -1,0 +1,46 @@
+import React from 'react'
+
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // 流逝的时间 0
+      secondsElapsed: 0
+    }
+  }
+
+  tick() {
+    this.setState((prevState) => ({
+      secondsElapsed: prevState.secondsElapsed + 1
+    }))
+    /* this.setState(function(ps) {
+      return {
+        secondsElapsed: ps.secondsElapsed + 1
+      }
+    }) */
+  }
+
+  // componentDidMount 会在组件 render 之后执行，并且永远只执行一次
+  // 两个自带的
+  componentDidMount() {
+    console.log('定时器组件 did mount')
+    // setInterval 的返回值是定时器 id 要用之歌删掉定时器
+    this.interval = setInterval(() => this.tick(), 1000)
+  }
+
+  // componentWillUnmount 会在组件 移除 之后执行，并且永远都只执行一次
+  componentWillUnmount() {
+    // 组件被干掉的时候会调用这个函数
+    // 所以在这里情调定时函数
+    console.log("定时器组件 will unmount")
+    clearInterval(this.interval)
+  }
+
+  render() {
+    return (
+      <div> 启动时间： {this.state.secondsElapsed} </div>
+    )
+  }
+}
+
+module.exports = Timer
