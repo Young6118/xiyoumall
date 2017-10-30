@@ -1,2 +1,0 @@
-# xiyoumall
-react demo
