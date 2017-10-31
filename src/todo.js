@@ -1,6 +1,7 @@
 /**
 * TodoApp 模块
 * @module
+* @exports TodoApp
 */
 
 import React from 'react'
@@ -31,12 +32,13 @@ class TodoApp extends React.Component {
   */
   render() {
     var buttonTitle = '添加第' + (this.state.items.length + 1) + ' 个 todo'
-    retrun (<div className="todo-div">
+    return (
+      <div className="todo-div">
       <h2>TODO</h2>
-      <TodoList todo={this.state.items} />
+      <TodoList todos={this.state.items} />
       <div>
         <input onChange={this.handleChange} value={this.state.text} placeholder="输入事项" />
-        <button onClick={this.handleSubmit}>{butonTitle}</button>
+        <button onClick={this.handleSubmit}>{buttonTitle}</button>
       </div>
     </div>
     )
@@ -60,9 +62,58 @@ class TodoApp extends React.Component {
     * items 不变动 setState 只改动 text
     * react 会在设置状态时重新调用 render
     × 所以需要重新将数据加上
-    * @param {state} items 不变动 setState 只改动 text
+    * @param {string} items 不变动 setState 只改动 text
     */
     this.setState(state)
   }
 
+  /**
+  * arow function bind this
+  * @todo handleSubmit
+  */
+
+  handleSubmit = (e) => {
+    var i = {
+      text: this.state.text,
+      /**
+      * set time as id 确保唯一性
+      * 为每一个 todo 设置一个不重复的数值
+      * @constant id
+      */
+      id: Date.now()
+    }
+    this.setState((prevState) => {
+      return {
+        items: prevState.items.concat(i),
+        text: ''
+      }
+    })
+  }
 }
+
+/**
+* TodoList 模块
+* @module
+*/
+
+class TodoList extends React.Component {
+  /**
+  * TodoApp 传入参数 state 所以可以使用 props
+  * @param {props}
+  */
+  render() {
+    /**
+    * map 需要有循环参数 key 比如 todo 的 id，方便 react 更新特定的数据
+    * @method map
+    */
+    return (
+      <ul>
+        {this.props.todos.map(t => (
+            <li key={t.id}>{t.text}</li>
+          ))}
+      </ul>
+    )
+  }
+}
+
+export default TodoApp

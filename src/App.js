@@ -22,6 +22,7 @@ class App extends Component {
     // 组件就是说呢 我们不写页面了
     // 我们写一个个组件 最后把小组件拼成一个 html
     // ? 三元表达式
+    // button 绑定事件
     var timer = this.state.showTimer ? <Timer /> : null
     return (
       <div className="App">
@@ -35,7 +36,6 @@ class App extends Component {
         </p>
         <Message name="Young" />
         <Message name="洋" />
-        // button 绑定事件
         <button onClick={this.handleToggleTimer}>开关 timer</button>
         {timer}
         <TodoApp />
@@ -54,4 +54,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
