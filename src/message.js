@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // 引入我们自己的 css
 import './message.css'

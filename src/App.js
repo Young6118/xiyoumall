@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 // 组件
@@ -7,6 +6,8 @@ import Message from './message'
 import Timer from './timer'
 import TodoApp from './todo'
 import MarkdownEditor from './editor'
+import Logo from './logo'
+
 
 class App extends Component {
   // constructor 是类被初始化后自动调用的函数
@@ -26,14 +27,7 @@ class App extends Component {
     var timer = this.state.showTimer ? <Timer /> : null
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2 className="App-title">欢迎来到 YoungChou 的第一个 react demo</h2>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-          哈哈 我们用了自动脚本 源文件发生改变 自动编译运行哦
-        </p>
+        <Logo />
         <Message name="Young" />
         <Message name="洋" />
         <button onClick={this.handleToggleTimer}>开关 timer</button>
